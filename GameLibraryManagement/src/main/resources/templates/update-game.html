@@ -1,0 +1,105 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Game</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--    These are for the datatables-->
+    <script type="text/javascript" th:src="@{/js/action.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://datatables.net/media/css/site-examples.css">
+</head>
+<style>
+    body, html {
+        max-height: 720px;
+        margin: 0;
+        font-family: initial !important;
+    }
+</style>
+<body style="background-color: black;">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}" style="font-family: fantasy;font-weight: 400;font-size: x-large;">GameBuster</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/admin/dashboard}">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Games<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/game/add}">Add New Game</a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/customer/list}">All Customers</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div>
+    <div class="jumbotron jumbotron-fluid" style="background-color: ghostwhite">
+        <div class="container">
+            <h1 style="text-align: center; font-family: fantasy;font-size: 30px !important;margin-top: -20px;">Update
+                the
+                Game details</h1>
+            <hr>
+            <form th:action="@{/game/update}" th:object="${game}" method="post"
+                  enctype="multipart/form-data"
+                  class="form">
+                <div class="form-group">
+                    <label for="id">Game#</label>
+                    <input class="form-control" type="number" th:field="*{id}" id="id"
+                           placeholder="Enter game id"
+                           readonly>
+                </div>
+                <div class="form-group">
+                    <label for="name">Game Name</label>
+                    <input class="form-control" type="text" th:field="*{name}" id="name"
+                           placeholder="Enter game name"
+                           required>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}"
+                         th:errors="*{name}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Game Description</label>
+                    <input class="form-control" type="text" th:field="*{description}" id="description"
+                           placeholder="Enter game description"
+                           required>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('description')}"
+                         th:errors="*{description}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Game Quantity</label>
+                    <input class="form-control" type="number" th:field="*{quantity}" id="quantity"
+                           placeholder="Enter game quantity"
+                           required>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('quantity')}"
+                         th:errors="*{quantity}"></div>
+                </div>
+                <div class="form-group">
+                    <label>Game Image: </label>
+                    <input type="file" name="image" accept="image/png, image/jpeg"/>
+                </div>
+                <input type="submit" class="btn btn-success col-4">
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

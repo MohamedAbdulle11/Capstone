@@ -1,0 +1,79 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: initial !important;
+    }
+
+    .bg {
+        /* Full height */
+        height: 93%;
+    }
+
+    label {
+        color: white;
+        font-size: 15px;
+        font-family: cursive;
+    }
+</style>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}" style="font-family: fantasy;font-weight: 400;font-size: x-large;">GameBusters</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li class="active"><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>
+                    Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="bg" th:style="'background: url(/images/login-bg.jpg);background-size: cover;margin-top:-20px'">
+    <div class="jumbotron jumbotron-fluid" style="background-color: transparent">
+        <h1 style="text-align: center; font-family: fangsong; color: white" class="login">SignIn</h1>
+        <br>
+        <div class="container">
+            <p th:if="${error}" class="error" style="text-align: center;color: red">Wrong username or password</p>
+            <form th:action="@{/login}" method="POST">
+                <div class="form-group">
+                    <input type="text" name="username" id="username" class="form-control input-lg"
+                           placeholder="Enter your username" required="true" autofocus="true"/>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="password" id="password" class="form-control input-lg"
+                           placeholder="Enter your Password" required="true"/>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3" style="float: none; margin: 0 auto;">
+                        <input type="submit" class="btn btn-primary btn-block" value="Login"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

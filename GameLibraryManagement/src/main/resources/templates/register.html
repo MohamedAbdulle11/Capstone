@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: initial !important;
+    }
+
+    .bg {
+        /* Full height */
+        height: 93%;
+    }
+
+    label {
+        color: white;
+        font-size: 15px;
+        font-family: initial;
+    }
+</style>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}" style="font-family: fantasy;font-weight: 400;font-size: x-large;">GameBusters</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li class="active"><a th:href="@{/login}" href="#"><span class="glyphicon glyphicon-log-in"></span>
+                    Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="bg" th:style="'background: url(/images/register-bg.jpg);background-size: cover;margin-top:-20px'">
+    <div class="jumbotron jumbotron-fluid" style="background-color: transparent;backdrop-filter: blur(4px);">
+        <div class="container">
+            <h1 style="text-align: center;font-size: 30px ;font-family: fantasy; margin-top: -30px; color: white;" class="login">User
+                Registration</h1>
+            <hr>
+            <h2 style="text-align: center; color: red" th:if="${alreadyUsernameExists}">There is already a user
+                registered against
+                this
+                username</h2>
+            <hr th:if="${alreadyUsernameExists}">
+
+            <h2 style="text-align: center; color: red" th:if="${alreadyEmailExists}">There is already a patient
+                registered
+                against
+                this email</h2>
+            <hr th:if="${alreadyEmailExists}">
+
+            <h2 style="text-align: center;font-family: fantasy; color: darkgreen" th:if="${successfully}">Your account
+                is
+                successfully created</h2>
+            <hr th:if="${successfully}">
+
+            <form th:action="@{/register}" th:object="${user}" method="post"
+                  class="form">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input class="form-control" type="text" th:field="*{firstName}" id="firstName"
+                           placeholder="Enter Your First Name"
+                           required>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('firstName')}"
+                         th:errors="*{firstName}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input class="form-control" type="text" th:field="*{lastName}" id="lastName"
+                           placeholder="Enter Your Last Name"
+                           required>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}"
+                         th:errors="*{lastName}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input class="form-control" type="text" th:field="*{username}" id="username"
+                           placeholder="Enter a unique Username" required>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('username')}"
+                         th:errors="*{username}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" type="text" th:field="*{email}" id="email"
+                           placeholder="Enter a unique email" required>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}"
+                         th:errors="*{email}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control" type="password" th:field="*{password}" id="password"
+                           placeholder="Enter a unique Password" required>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}"
+                         th:errors="*{password}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input class="form-control" type="text" th:field="*{address}" id="address"
+                           placeholder="Enter your address" required>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('address')}"
+                         th:errors="*{address}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input class="form-control" type="number" th:field="*{age}" id="age"
+                           placeholder="Enter your age" required>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('age')}"
+                         th:errors="*{age}"></div>
+                </div>
+                <input type="submit" class="btn btn-primary btn-block">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
